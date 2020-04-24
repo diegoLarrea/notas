@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseService} from 'src/services/firebase.service'
-import { Note } from 'src/models/note';
+import { FirebaseService } from 'src/services/firebase.service';
 import { ToastrService } from 'ngx-toastr';
+import { Note } from 'src/models/note';
 declare var $:any;
 declare var loadingOverlay:any;
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-notas',
+  templateUrl: './notas.component.html',
+  styleUrls: ['./notas.component.css']
 })
-export class AppComponent implements OnInit{
+export class NotasComponent implements OnInit {
+
   constructor(private firestore: FirebaseService, private toastr: ToastrService){
 
   }
@@ -52,4 +53,5 @@ export class AppComponent implements OnInit{
       this.toastr.error("Complete los campos");
     }
   }
+
 }

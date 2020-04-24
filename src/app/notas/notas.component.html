@@ -1,0 +1,53 @@
+<div class="container p-3">
+    <div class="row">
+        <div *ngFor="let i of notas" class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    {{i.fecha}}<br>
+                    <span *ngIf="i.relevancia && i.relevancia == 'Alta' " class="badge badge-danger">Relevancia:
+                        {{i.relevancia}}</span>
+                    <span *ngIf="i.relevancia && i.relevancia == 'Media' " class="badge badge-warning">Relevancia:
+                        {{i.relevancia}}</span>
+                    <span *ngIf="i.relevancia && i.relevancia == 'Baja' " class="badge badge-success">Relevancia:
+                        {{i.relevancia}}</span>
+                </div>
+                <div class="card-body overflow-auto" [innerHTML]="i.nota" style="height: 150px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="addNoteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row p-2">
+                    <div class="col-12 col-md-6">
+                        <h5 class="modal-title" id="addNoteTitle">Agregar nota</h5>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <select id="relevancia" class="float-right" data-style="btn-success" title="Relevancia">
+                            <option value="Alta" title="Alta">Alta</option>
+                            <option value="Media" title="Media">Media</option>
+                            <option value="Baja" title="Baja">Baja</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="nota" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click)="postNote()" type="button" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating Action Button Mobile -->
+<a data-toggle="modal" data-target="#addNote" class="btn-circle-mobile bg-success d-block d-md-none"><i
+        class="fas fa-plus fa-lg"></i></a>
