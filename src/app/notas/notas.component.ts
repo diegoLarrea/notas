@@ -3,7 +3,6 @@ import { FirebaseService } from 'src/services/firebase.service';
 import { ToastrService } from 'ngx-toastr';
 import { Note } from 'src/models/note';
 declare var $:any;
-declare var loadingOverlay:any;
 @Component({
   selector: 'app-notas',
   templateUrl: './notas.component.html',
@@ -16,7 +15,7 @@ export class NotasComponent implements OnInit {
   }
   title = 'notes';
   notas: Note[] = [];
-  spinHandle = null;
+  loading = true;
   ngOnInit(){
 
     $('#nota').summernote({
@@ -29,15 +28,15 @@ export class NotasComponent implements OnInit {
   }
 
   getNotas(){
-    this.spinHandle = loadingOverlay().activate();
+    this.loading = true;
     this.firestore.getNotes().subscribe(data => {
       this.notas = data.map(e => {
         let r: Note = e.payload.doc.data() as Note;
         r.id = e.payload.doc.id;
         r.fecha = r.fecha.toDate().toLocaleString();
-        loadingOverlay().cancel(this.spinHandle);
         return r;
-      })
+      });
+      this.loading = false;
     });
   }
 
