@@ -15,4 +15,8 @@ export class FirebaseService {
   postNote(data){
     return this.firestore.collection("notas").add(data);
   }
+
+  deleteNote(id){
+    return this.firestore.collection("notas").doc(id).delete();
+  }
 }

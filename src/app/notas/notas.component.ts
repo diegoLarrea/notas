@@ -25,12 +25,11 @@ export class NotasComponent implements OnInit {
 
     $('select').selectpicker({container:'body'});
 
-    this.spinHandle = loadingOverlay().activate();
-
     this.getNotas();
   }
 
   getNotas(){
+    this.spinHandle = loadingOverlay().activate();
     this.firestore.getNotes().subscribe(data => {
       this.notas = data.map(e => {
         let r: Note = e.payload.doc.data() as Note;
@@ -53,5 +52,10 @@ export class NotasComponent implements OnInit {
       this.toastr.error("Complete los campos");
     }
   }
-
+  deleteNote(id){
+    this.firestore.deleteNote(id)
+    .then(
+      res => {}
+    )
+  }
 }

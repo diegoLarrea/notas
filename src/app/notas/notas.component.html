@@ -3,7 +3,8 @@
         <div *ngFor="let i of notas" class="col-12 col-md-6 col-lg-4 mb-3">
             <div class="card">
                 <div class="card-header">
-                    {{i.fecha}}<br>
+                    <a (click)="deleteNote(i.id)" title="Eliminar nota" style="cursor: pointer;"><i class="fas fa-trash fa-lg float-right text-danger my-auto"></i></a>
+                    {{i.fecha}}<br>                    
                     <span *ngIf="i.relevancia && i.relevancia == 'Alta' " class="badge badge-danger">Relevancia:
                         {{i.relevancia}}</span>
                     <span *ngIf="i.relevancia && i.relevancia == 'Media' " class="badge badge-warning">Relevancia:
